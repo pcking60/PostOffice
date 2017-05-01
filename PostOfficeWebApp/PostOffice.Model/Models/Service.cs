@@ -1,0 +1,51 @@
+﻿using PostOffice.Model.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PostOffice.Model.Abstract
+{
+    [Table("Services")]
+    public class Service : Auditable
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+
+        [Required]
+        [MaxLength(256)]
+        public string Name { get; set; }
+
+        [Required]
+        [MaxLength(256)]
+        public string Alias { get; set; }
+
+        [Required]
+        public int GroupID { get; set; }
+
+        [MaxLength(50)]
+        [Column(TypeName = "varchar")]
+        public string Unit { get; set; }
+
+        public decimal? BuyIn { get; set; }
+        public decimal? SoldOut { get; set; }
+        public float? VAT { get; set; }
+        public int? PayMethodID { get; set; }
+
+        [ForeignKey("PayMethodID")]
+        public virtual IEnumerable<PaymentMethod> PaymentMethods { get; set; }
+
+        [MaxLength(256)]
+        public string Description { get; set; }
+
+        [ForeignKey("GroupID")]
+        public virtual ServiceGroup ServiceGroup { get; set; }
+
+        public virtual IEnumerable<PropertyService> PropertyServices { get; set; }
+    }
+
+}
