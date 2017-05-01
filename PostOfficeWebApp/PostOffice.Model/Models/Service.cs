@@ -1,13 +1,9 @@
-﻿using PostOffice.Model.Models;
-using System;
+﻿using PostOffice.Model.Abstract;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PostOffice.Model.Abstract
+namespace PostOffice.Model.Models
 {
     [Table("Services")]
     public class Service : Auditable
@@ -47,5 +43,4 @@ namespace PostOffice.Model.Abstract
 
         public virtual IEnumerable<PropertyService> PropertyServices { get; set; }
     }
-
 }

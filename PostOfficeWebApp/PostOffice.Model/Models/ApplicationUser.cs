@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace PostOffice.Model.Abstract
+namespace PostOffice.Model.Models
 {
     public class ApplicationUser : IdentityUser
     {

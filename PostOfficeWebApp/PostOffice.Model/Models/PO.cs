@@ -1,9 +1,9 @@
-﻿using PostOffice.Model.Models;
+﻿using PostOffice.Model.Abstract;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PostOffice.Model.Abstract
+namespace PostOffice.Model.Models
 {
     [Table("PostOffices")]
     public class PO : Auditable

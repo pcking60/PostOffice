@@ -1,9 +1,9 @@
-﻿using PostOffice.Model.Models;
+﻿using PostOffice.Model.Abstract;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PostOffice.Model.Abstract
+namespace PostOffice.Model.Models
 {
     [Table("Transactions")]
     public class Transaction : Auditable
@@ -14,9 +14,7 @@ namespace PostOffice.Model.Abstract
 
         [Required]
         public int ServiceID { get; set; }
-
-        [Required]
-        public int StaffID { get; set; }
+        
 
         public int TransactionTypeID { get; set; }
 
@@ -25,9 +23,7 @@ namespace PostOffice.Model.Abstract
 
         [ForeignKey("ServiceID")]
         public virtual Service Service { get; set; }
-
-        [ForeignKey("StaffID")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+       
 
         [Required]
         public DateTime TransactionDate { get; set; }
