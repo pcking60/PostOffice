@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostOfiice.Data", "PostOfii
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostOffice.Service", "PostOffice.Service\PostOffice.Service.csproj", "{BF24ADFB-1094-49A0-BB18-9CE3E1967357}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostOffice.Web", "PostOffice.Web\PostOffice.Web.csproj", "{06EFA961-68FF-429D-84DF-D34F98625CC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BF24ADFB-1094-49A0-BB18-9CE3E1967357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF24ADFB-1094-49A0-BB18-9CE3E1967357}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF24ADFB-1094-49A0-BB18-9CE3E1967357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06EFA961-68FF-429D-84DF-D34F98625CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06EFA961-68FF-429D-84DF-D34F98625CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06EFA961-68FF-429D-84DF-D34F98625CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06EFA961-68FF-429D-84DF-D34F98625CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
