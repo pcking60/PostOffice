@@ -24,8 +24,6 @@ namespace PostOfiice.DAta
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
         public DbSet<VisittorStatistic> VisittorStatistics { get; set; }
-
-        
         public DbSet<ApplicationGroup> ApplicationGroups { set; get; }
         public DbSet<ApplicationRole> ApplicationRoles { set; get; }
         public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { set; get; }

@@ -17,12 +17,14 @@ namespace PostOffice.Web.Api
     public class POController : ApiControllerBase
     {
         private IPOService _poService;
+        private IApplicationUserService _userService;
         private IDistrictService _districtService;
 
-        public POController(IErrorService errorService, IPOService poService, IDistrictService districtService) : base(errorService)
+        public POController(IErrorService errorService, IPOService poService, IDistrictService districtService, IApplicationUserService userService) : base(errorService)
         {
             this._poService = poService;
             this._districtService = districtService;
+            this._userService = userService;
         }
 
         [Route("getall")]
@@ -40,7 +42,8 @@ namespace PostOffice.Web.Api
                 foreach (var item in responseData)
                 {
                     var district = _districtService.GetById(item.DistrictID);
-
+                    int No = _userService.getNoUserByPoID(item.ID);
+                    item.NoUser = No;
                     item.DistrictName = district.Name;
                 }
 

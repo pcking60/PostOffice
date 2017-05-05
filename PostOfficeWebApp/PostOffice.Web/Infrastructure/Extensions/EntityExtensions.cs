@@ -61,6 +61,7 @@ namespace PostOffice.Web.Infrastructure.Extensions
             po.POStyle = vm.POStyle;
             po.UpdatedBy = vm.UpdatedBy;
             po.UpdatedDate = vm.UpdatedDate;
+            po.Status = vm.Status;
           
         }
     }

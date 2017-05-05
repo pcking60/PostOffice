@@ -23,6 +23,8 @@ namespace PostOffice.Web.Models
 
         public virtual DistrictViewModel District { get; set; }
 
+
+        public int NoUser { get; set; }
         public IEnumerable<ApplicationUserViewModel> Staffs { get; set; }
 
         #region common

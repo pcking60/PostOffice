@@ -223,6 +223,13 @@
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\pos\pos.module.js" />
+    <Content Include="app\components\pos\poAddController.js" />
+    <Content Include="app\components\pos\poAddView.html" />
+    <Content Include="app\components\pos\poController.js" />
+    <Content Include="app\components\pos\poEditController.js" />
+    <Content Include="app\components\pos\poEditView.html" />
+    <Content Include="app\components\pos\poView.html" />
     <Content Include="app\shared\directives\asDateDirective.js" />
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDirective.js" />
@@ -5480,7 +5487,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\pos\" />
     <Folder Include="app\shared\footer\" />
     <Folder Include="app\shared\navigation\" />
     <Folder Include="App_Data\" />
