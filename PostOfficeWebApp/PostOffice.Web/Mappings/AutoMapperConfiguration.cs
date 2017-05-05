@@ -11,6 +11,7 @@ namespace PostOffice.Web.Mappings
             Mapper.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
             Mapper.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
             Mapper.CreateMap<ApplicationUser, ApplicationUserViewModel>();
+            Mapper.CreateMap<District, DistrictViewModel>();
             Mapper.CreateMap<PO, POViewModel>();
         }
     }

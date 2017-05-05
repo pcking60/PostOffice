@@ -2,6 +2,7 @@
 using PostOfiice.DAta.Infrastructure;
 using PostOfiice.DAta.Repositories;
 using System.Collections.Generic;
+using System;
 
 namespace PostOffice.Service
 {
@@ -18,6 +19,7 @@ namespace PostOffice.Service
         PO GetByID(int id);
 
         IEnumerable<PO> Getall();
+        IEnumerable<PO> GetAllPOByDistrictId(int districtID);
     }
 
     public class POService : IPOService
@@ -44,6 +46,11 @@ namespace PostOffice.Service
         public IEnumerable<PO> Getall()
         {
             return _poRepository.GetAll();
+        }
+
+        public IEnumerable<PO> GetAllPOByDistrictId(int districtID)
+        {
+            return _poRepository.GetAllPOByDistrictId(districtID);
         }
 
         public PO GetByID(int id)

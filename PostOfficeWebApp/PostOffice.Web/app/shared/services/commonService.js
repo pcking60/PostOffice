@@ -6,7 +6,15 @@
 
     function commonService() {
         return {
-            getSeoTitle: getSeoTitle
+            getSeoTitle: getSeoTitle,
+            toTitleCase: toTitleCase
+        }
+
+        function toTitleCase(str) {
+            if (str == undefined || str == '')
+                return '';
+            else
+                return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
         }
         function getSeoTitle(input) {
             if (input == undefined || input == '')

@@ -211,6 +211,13 @@
     <Content Include="app\components\application_users\applicationUserListController.js" />
     <Content Include="app\components\application_users\applicationUserListView.html" />
     <Content Include="app\components\application_users\applicationUsers.module.js" />
+    <Content Include="app\components\districts\districtAddController.js" />
+    <Content Include="app\components\districts\districtAddView.html" />
+    <Content Include="app\components\districts\districtEditController.js" />
+    <Content Include="app\components\districts\districtEditView.html" />
+    <Content Include="app\components\districts\districtListController.js" />
+    <Content Include="app\components\districts\districtListView.html" />
+    <Content Include="app\components\districts\districts.module.js" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\home\rootController.js" />
@@ -5126,6 +5133,7 @@
     <Compile Include="Api\ApplicationGroupController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
+    <Compile Include="Api\DistrictService.cs" />
     <Compile Include="Api\PoController.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -5472,6 +5480,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\components\pos\" />
     <Folder Include="app\shared\footer\" />
     <Folder Include="app\shared\navigation\" />
     <Folder Include="App_Data\" />

@@ -33,6 +33,19 @@ namespace PostOffice.Web.Infrastructure.Extensions
             appUser.POID = appUserViewModel.POID;
         }
 
+        public static void UpdateDistrict(this District dis, DistrictViewModel vm) {
+            dis.Code = vm.Code;
+            dis.CreatedBy = vm.CreatedBy;
+            dis.CreatedDate = vm.CreatedDate;
+            dis.ID = vm.ID;
+            dis.MetaDescription = vm.MetaDescription;
+            dis.MetaKeyWord = vm.MetaKeyWord;
+            dis.Name = vm.Name;
+            dis.Status = vm.Status;
+            dis.UpdatedBy = vm.UpdatedBy;
+            dis.UpdatedDate = vm.UpdatedDate;
+        }
+
         public static void UpdatePO(this PO po, POViewModel vm)
         {
             po.Code = vm.Code;

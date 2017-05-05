@@ -3,6 +3,7 @@ using PostOfiice.DAta.Infrastructure;
 using PostOfiice.DAta.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace PostOffice.Service
 {
@@ -20,7 +21,7 @@ namespace PostOffice.Service
 
         IEnumerable<District> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
 
-        IEnumerable<string> GetListDistrictByName(string name);
+        IEnumerable<string> GetListDistrictByName(string name);        
 
         District GetById(int id);
 
@@ -90,5 +91,7 @@ namespace PostOffice.Service
 
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
+
+       
     }
 }
