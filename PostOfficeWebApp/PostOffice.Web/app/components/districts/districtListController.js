@@ -12,6 +12,7 @@ angular.module('postoffice.districts')
                 $scope.search = search;
                 $scope.selectAll = selectAll;
                 $scope.deleteMulti = deleteMulti;
+                $scope.loading = true;
 
                 function deleteMulti() {
                     var listId = [];
@@ -98,13 +99,14 @@ angular.module('postoffice.districts')
                         if (result.data.TotalCount == 0) {
                             notificationService.displayWarning("Không tìm thấy bản ghi nào!");
                         }
-
+                        $scope.loading = false;
                         $scope.districts = result.data.Items;
                         $scope.page = result.data.Page;
                         $scope.pagesCount = result.data.TotalPages;
                         $scope.totalCount = result.data.TotalCount;
                     },
                     function () {
+                        $scope.loading = false;
                         console.log('Load districts failed');
                     });
                 } $scope.getDistricts();

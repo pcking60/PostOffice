@@ -10,8 +10,10 @@ namespace PostOffice.Service
 {
     public interface IApplicationUserService {
         int getNoUserByPoID(int PoID);
+
+        string getIdByUserName(string userName);
     }
-   public class ApplicationUserService: IApplicationUserService
+    public class ApplicationUserService: IApplicationUserService
     {
         private IApplicationUserRepository _userRepository;
         private IUnitOfWork _unitOfWork;
@@ -25,6 +27,11 @@ namespace PostOffice.Service
         public int getNoUserByPoID(int PoID)
         {
             return _userRepository.getNoUserByPoID(PoID);
+        }
+
+        public string getIdByUserName(string userName)
+        {
+            return _userRepository.getIdByUserName(userName);
         }
     }
 }

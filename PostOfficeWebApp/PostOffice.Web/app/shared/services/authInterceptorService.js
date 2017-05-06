@@ -1,6 +1,6 @@
 ﻿'use strict';
 angular.module('postoffice.common')
-    .service('authInterceptorService', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
+    .service('authInterceptorService', ['$q', '$location', 'localStorageService', 'notificationService', function ($q, $location, localStorageService, notificationService) {
 
         var authInterceptorServiceFactory = {};
 
@@ -19,6 +19,7 @@ angular.module('postoffice.common')
         var _responseError = function (rejection) {
             if (rejection.status === 401) {
                 $location.path('/login');
+                notificationService.displayError('Truy cập trái phép!');
             }
             return $q.reject(rejection);
         }

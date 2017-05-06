@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="box-body">
-      <di class="row">
+      <div class="row">
         <div class="col-md-6">
           <div class="input-group">
             <input type="text" class="form-control" ng-model="keyword" placeholder="Từ khóa">
@@ -35,24 +35,28 @@
           <button class="btn btn-success" ui-sref="add_application_role">Thêm mới</button>
           <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
         </div>
-      </di>
+      </div>
+      <div class="row"><br /></div>
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered">
-            <tr>
-           <td>
-             <input name="all" type="checkbox" ng-click="selectAll()" />
-              <th style="width:55%">Tên quyền</th>
-              <th style="width: 20%">Mô tả</th>
-              <th style="width: 10%">Thao tác</th>
+            <tr>         
+                <th style="width:5%" class="text-center text-bold"><input name="all" type="checkbox" ng-click="selectAll()" /></th>
+                <th style="width:20%" class="text-center text-bold">Tên quyền</th>
+                <th style="width: 15%" class="text-center text-bold">Ngày tạo</th>
+                <th style="width: 15%" class="text-center text-bold">Ngày cập nhật</th>
+                <th style="width: 35%" class="text-center text-bold">Mô tả</th>
+                <th style="width: 10%" class="text-center text-bold">Thao tác</th>
             </tr>
             <tr ng-repeat="item in data">
-              <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
+              <td class="text-center"><input type="checkbox" ng-model="item.checked" name="all" /></td>
               <td><a ui-sref="edit_application_role({id:item.Id})">{{item.Name}}</a></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
               <td>
                 {{item.Description}}
-              </td>
-              <td>
+              </td>                
+              <td class="text-center">
                 <button class="btn btn-sm btn-primary" ui-sref="edit_application_role({id:item.Id})"><i class="fa fa-pencil"></i></button>
                 <button class="btn  btn-sm btn-danger" ng-click="deleteItem(item.Id)"><i class="fa fa-trash"></i></button>
               </td>
@@ -65,6 +69,13 @@
           </table>
         </div>
       </div>
+        <div ng-if="loading">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4">
+                <i class="fa fa-spinner fa-3x fa-spin"></i>
+            </div>
+            <div class="col-xs-4"></div>
+        </div>
     </div><!-- /.box-body -->
     <div class="box-footer">
       <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCagories(page)"></pager-directive>

@@ -17,6 +17,7 @@ namespace PostOfiice.DAta
 
         public DbSet<PO> PostOffices { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceDetail> ServiceDetails { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
 
         public DbSet<Error> Errors { get; set; }
@@ -30,6 +31,8 @@ namespace PostOfiice.DAta
         public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
 
         public DbSet<PropertyPO> PropertyPOs { set; get; }
+        public DbSet<Property> Properties { set; get; }
+        public DbSet<Percent> Percents { set; get; }
         public DbSet<PropertyService> PropertyServices { set; get; }
 
         protected override void OnModelCreating(DbModelBuilder builder)

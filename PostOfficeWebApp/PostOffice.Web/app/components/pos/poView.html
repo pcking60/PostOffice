@@ -50,7 +50,7 @@
                             <td style="vertical-align:middle" class="text-center">{{item.Code}}</td>                            
                             <td>{{item.DistrictName}}</td>
                             <td style="vertical-align:middle" class="text-center">{{item.NoUser}}</td>
-                            <!--<td>{{item.CreatedDate | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>-->
+                            <!--<td>{{item.CreatedDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>-->
                             <td style="vertical-align:middle" class="text-center"><span ng-class="{'badge bg-red': item.Status==false, 'badge bg-green':item.Status==true}">{{item.Status | statusFilter}}</span></td>
                             <td style="vertical-align:middle" class="text-center">
                                 <button class="btn btn-sm btn-primary" ui-sref="edit_po({id:item.ID})"><i class="fa fa-pencil"></i></button>

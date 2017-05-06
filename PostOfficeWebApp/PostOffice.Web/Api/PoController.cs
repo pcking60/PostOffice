@@ -14,6 +14,7 @@ using System.Web.Http;
 namespace PostOffice.Web.Api
 {
     [RoutePrefix("api/po")]
+    [Authorize]
     public class POController : ApiControllerBase
     {
         private IPOService _poService;

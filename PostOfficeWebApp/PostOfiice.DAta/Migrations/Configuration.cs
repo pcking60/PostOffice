@@ -4,9 +4,7 @@ namespace PostOfiice.DAta.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using PostOffice.Model.Models;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<PostOfiice.DAta.PostOfficeDbContext>
     {
@@ -23,26 +21,25 @@ namespace PostOfiice.DAta.Migrations
 
             var user = new ApplicationUser()
             {
-                UserName = "po",
+                UserName = "admin",
                 Email = "postoffice.international@gmail.com",
                 EmailConfirmed = true,
                 BirthDay = DateTime.Now,
                 FullName = "Post Office",
                 POID = 4
-
             };
 
             manager.Create(user, "123456");
 
-            if (!roleManager.Roles.Any())
-            {
-                roleManager.Create(new IdentityRole { Name = "Admin" });
-                roleManager.Create(new IdentityRole { Name = "User" });
-            }
+            //if (!roleManager.Roles.Any())
+            //{
+            //    roleManager.Create(new IdentityRole { Name = "Admin" });
+            //    roleManager.Create(new IdentityRole { Name = "User" });
+            //}
 
-            var adminUser = manager.FindByEmail("postoffice.international@gmail.com");
+            //var adminUser = manager.FindByEmail("postoffice.international@gmail.com");
 
-            manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+            //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
     }
 }

@@ -15,6 +15,7 @@ using System.Web.Script.Serialization;
 namespace PostOffice.Web.Api
 {
     [RoutePrefix("api/district")]
+    [Authorize]
     public class DistrictController : ApiControllerBase
     {
         private IDistrictService _districtService;

@@ -21,18 +21,24 @@ namespace PostOffice.Web.Api
     {
         private ApplicationUserManager _userManager;
         private IApplicationGroupService _appGroupService;
+        private IPOService _poService;
         private IApplicationRoleService _appRoleService;
+        private IApplicationUserService _userService;
 
         public ApplicationUserController(
             IApplicationGroupService appGroupService,
             IApplicationRoleService appRoleService,
             ApplicationUserManager userManager,
+            IPOService poService,
+            IApplicationUserService userService,
             IErrorService errorService)
             : base(errorService)
         {
             _appRoleService = appRoleService;
             _appGroupService = appGroupService;
             _userManager = userManager;
+            _poService = poService;
+            _userService = userService;
         }
 
         [Route("getlistpaging")]
@@ -47,6 +53,10 @@ namespace PostOffice.Web.Api
                 var model = _userManager.Users;
                 IEnumerable<ApplicationUserViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserViewModel>>(model);
 
+                foreach (var item in modelVm) {
+                    var po = _poService.GetByID(item.POID);
+                    item.POName = po.Name;
+                }
                 PaginationSet<ApplicationUserViewModel> pagedSet = new PaginationSet<ApplicationUserViewModel>()
                 {
                     Page = page,
@@ -83,6 +93,7 @@ namespace PostOffice.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
             }
         }
+        
 
         [HttpPost]
         [Route("add")]

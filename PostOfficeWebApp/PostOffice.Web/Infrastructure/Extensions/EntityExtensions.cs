@@ -31,6 +31,7 @@ namespace PostOffice.Web.Infrastructure.Extensions
             appUser.UserName = appUserViewModel.UserName;
             appUser.PhoneNumber = appUserViewModel.PhoneNumber;
             appUser.POID = appUserViewModel.POID;
+            appUser.Status = appUserViewModel.Status;
         }
 
         public static void UpdateDistrict(this District dis, DistrictViewModel vm) {
@@ -64,5 +65,64 @@ namespace PostOffice.Web.Infrastructure.Extensions
             po.Status = vm.Status;
           
         }
+
+        public static void UpdateServiceGroup(this ServiceGroup serviceGroup, ServiceGroupViewModel serviceGroupVM)
+        {
+            serviceGroup.ID = serviceGroupVM.ID;
+            serviceGroup.Alias = serviceGroupVM.Alias;
+            serviceGroup.CreatedBy = serviceGroupVM.CreatedBy;
+            serviceGroup.CreatedDate = serviceGroupVM.CreatedDate;
+            serviceGroup.Description = serviceGroupVM.Description;
+            serviceGroup.DisplayOrder = serviceGroupVM.DisplayOrder;
+            serviceGroup.Image = serviceGroupVM.Image;
+            serviceGroup.MetaDescription = serviceGroupVM.MetaDescription;
+            serviceGroup.MetaKeyWord = serviceGroupVM.MetaKeyWord;
+            serviceGroup.Name = serviceGroupVM.Name;
+            serviceGroup.ParentID = serviceGroupVM.ParentID;
+
+            serviceGroup.Status = serviceGroupVM.Status;
+            serviceGroup.UpdatedBy = serviceGroupVM.UpdatedBy;
+            serviceGroup.UpdatedDate = serviceGroupVM.UpdatedDate;
+        }
+
+        public static void UpdateService(this PostOffice.Model.Models.Service service, ServiceViewModel serviceVM)
+        {
+            service.ID = serviceVM.ID;
+            service.Alias = serviceVM.Alias;
+            service.CreatedBy = serviceVM.CreatedBy;
+            service.CreatedDate = serviceVM.CreatedDate;
+            service.Description = serviceVM.Description;
+            service.BuyIn = serviceVM.BuyIn;
+            service.SoldOut = serviceVM.SoldOut;
+            service.VAT = serviceVM.VAT;
+            service.CreatedBy = serviceVM.CreatedBy;
+            service.CreatedDate = serviceVM.CreatedDate;
+            service.Description = serviceVM.Description;
+            service.GroupID = serviceVM.GroupID;
+            service.PayMethodID = serviceVM.PayMethodID;
+            service.MetaDescription = serviceVM.MetaDescription;
+            service.MetaKeyWord = serviceVM.MetaKeyWord;
+            service.Name = serviceVM.Name;
+            service.Status = serviceVM.Status;
+            service.UpdatedBy = serviceVM.UpdatedBy;
+            service.UpdatedDate = serviceVM.UpdatedDate;
+        }
+
+        
+        public static void UpdatePaymentMethod(this PaymentMethod payment, PaymentMethodViewModel paymentVM)
+        {
+            payment.CreatedBy = paymentVM.CreatedBy;
+            payment.CreatedDate = paymentVM.CreatedDate;
+            payment.Description = paymentVM.Description;
+            payment.ID = paymentVM.ID;
+            payment.MetaDescription = paymentVM.MetaDescription;
+            payment.MetaKeyWord = paymentVM.MetaKeyWord;
+            payment.Name = paymentVM.Name;
+            payment.Status = paymentVM.Status;
+            payment.UpdatedBy = paymentVM.UpdatedBy;
+            payment.UpdatedDate = paymentVM.UpdatedDate;
+            payment.Value = paymentVM.Value;
+        }
+
     }
 }

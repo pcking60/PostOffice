@@ -43,6 +43,8 @@ angular.module('postoffice.common')
 
         };
 
+       
+
         var _fillAuthData = function () {
 
             var authData = localStorageService.get('authorizationData');
@@ -52,7 +54,6 @@ angular.module('postoffice.common')
             }
 
         }
-
         
         authServiceFactory.login = _login;
         authServiceFactory.logOut = _logOut;
