@@ -12,7 +12,7 @@
         }
         $scope.AddService = AddService;
         function AddService() {
-            apiService.post('/api/service/create', $scope.service,
+            apiService.post('/api/service/add', $scope.service,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + ' được thêm thành công');
                     $state.go('services');
@@ -27,14 +27,14 @@
                 console.log('Can not load service group!');
             });
         }
-        function loadPaymentMethod() {
-            apiService.get('/api/payment/getallname', null, function (result) {
-                $scope.paymentMethods = result.data;
-            }, function () {
-                console.log('Can not load payment method !');
-            });
-        }
+        //function loadPaymentMethod() {
+        //    apiService.get('/api/payment/getallname', null, function (result) {
+        //        $scope.paymentMethods = result.data;
+        //    }, function () {
+        //        console.log('Can not load payment method !');
+        //    });
+        //}
         loadparentGroup();
-        loadPaymentMethod();
+        //loadPaymentMethod();
     }
 })(angular.module('postoffice.services'));

@@ -12,6 +12,7 @@ angular.module('postoffice',
                 'angular-loading-bar',
                 'LocalStorageModule',
                 'ngCookies',
+                'ngBootstrap',
                 'postoffice.common'
             ])
 

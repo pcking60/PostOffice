@@ -31,7 +31,7 @@ namespace PostOfiice.DAta
         public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
 
         public DbSet<PropertyPO> PropertyPOs { set; get; }
-        public DbSet<Property> Properties { set; get; }
+        public DbSet<PropertyServiceDetail> PropertyServiceDetails { set; get; }
         public DbSet<Percent> Percents { set; get; }
         public DbSet<PropertyService> PropertyServices { set; get; }
 

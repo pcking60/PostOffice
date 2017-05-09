@@ -21,7 +21,7 @@ namespace PostOffice.Model.Models
         public string Alias { get; set; }
 
         [Required]
-        public int GroupID { get; set; }
+        public int GroupID { get; set; }        
 
         [MaxLength(50)]
         [Column(TypeName = "varchar")]
@@ -41,6 +41,7 @@ namespace PostOffice.Model.Models
         [ForeignKey("GroupID")]
         public virtual ServiceGroup ServiceGroup { get; set; }
 
+        
         public virtual IEnumerable<PropertyService> PropertyServices { get; set; }
     }
 }

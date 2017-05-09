@@ -11,6 +11,8 @@
     <AssemblyName>PostOfiice.DAta</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,13 +91,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201705010508202_Initial-DB.cs" />
-    <Compile Include="Migrations\201705010508202_Initial-DB.Designer.cs">
-      <DependentUpon>201705010508202_Initial-DB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705060120279_addSomeTable.cs" />
-    <Compile Include="Migrations\201705060120279_addSomeTable.Designer.cs">
-      <DependentUpon>201705060120279_addSomeTable.cs</DependentUpon>
+    <Compile Include="Migrations\201705091250205_InitialDB.cs" />
+    <Compile Include="Migrations\201705091250205_InitialDB.Designer.cs">
+      <DependentUpon>201705091250205_InitialDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PostOfficeDbContext.cs" />
@@ -113,14 +111,6 @@
     <Compile Include="Repositories\TransactionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705010508202_Initial-DB.resx">
-      <DependentUpon>201705010508202_Initial-DB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705060120279_addSomeTable.resx">
-      <DependentUpon>201705060120279_addSomeTable.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\PostOffice.Model\PostOffice.Model.csproj">
       <Project>{8ae2fe9e-cffa-4e55-a236-062952315084}</Project>
       <Name>PostOffice.Model</Name>
@@ -129,6 +119,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705091250205_InitialDB.resx">
+      <DependentUpon>201705091250205_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

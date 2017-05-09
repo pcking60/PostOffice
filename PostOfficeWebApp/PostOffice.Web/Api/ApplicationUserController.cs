@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace PostOffice.Web.Api
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {

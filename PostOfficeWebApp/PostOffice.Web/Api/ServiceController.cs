@@ -88,10 +88,9 @@ namespace PostOffice.Web.Api
             });
         }
 
-        [Route("create")]
+        [Route("add")]
         [HttpPost]
-        [AllowAnonymous]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, ServiceViewModel serviceVM)
+        public HttpResponseMessage Add(HttpRequestMessage request, ServiceViewModel serviceVM)
         {
             return CreateHttpResponse(request, () =>
             {

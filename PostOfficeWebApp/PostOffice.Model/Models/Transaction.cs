@@ -1,5 +1,6 @@
 ﻿using PostOffice.Model.Abstract;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,20 +11,21 @@ namespace PostOffice.Model.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int ID { get; set; }        
 
-        [Required]
-        public int ServiceID { get; set; }
-        
+        public int ServiceId { get; set; }
 
-        public int TransactionTypeID { get; set; }
+        public string UserId { get; set; }
 
-        [ForeignKey("TransactionTypeID")]
-        public virtual TransactionType TransactionType { get; set; }
+        public int TransactionDetailId { get; set; }
 
-        [ForeignKey("ServiceID")]
-        public virtual Service Service { get; set; }
-       
+        [ForeignKey("TransactionDetailId")]
+        [Column(Order =1)]
+        public virtual IEnumerable<TransactionDetail> TransactionDetails { get; set; }
+
+        [ForeignKey("UserId")]
+        [Column(Order = 2)]
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
         public DateTime TransactionDate { get; set; }

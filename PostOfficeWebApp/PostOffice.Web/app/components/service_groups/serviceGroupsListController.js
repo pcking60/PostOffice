@@ -2,9 +2,10 @@
     app.controller('serviceGroupsListController', serviceGroupsListController);
     serviceGroupsListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
     function serviceGroupsListController($scope, apiService, notificationService, $ngBootbox, $filter) {
+             
         $scope.page = 0;
         $scope.pagesCount = 0;
-        $scope.serviceGroups = [];
+        $scope.serviceGroups = [];     
         $scope.getServiceGroups = getServiceGroups;
         $scope.keyword = '';
         $scope.search = search;
@@ -12,6 +13,7 @@
         $scope.selectAll = selectAll;
         $scope.deleteMulti = deleteMulti;
 
+        
         function deleteMulti() {
             var listId = [];
             $.each($scope.selected, function (i, item) {
@@ -93,7 +95,7 @@
                     notificationService.displayWarning("Chưa có dữ liệu");
                 }
                
-                $scope.serviceGroups = result.data.Items;
+                $scope.serviceGroups = result.data.Items;                
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
@@ -101,6 +103,9 @@
             function () {
                 console.log('Load servicegroups failed');
             });
-        } $scope.getServiceGroups();
+
+        }
+        $scope.getServiceGroups();
+        
     }
 })(angular.module('postoffice.service_groups'));
