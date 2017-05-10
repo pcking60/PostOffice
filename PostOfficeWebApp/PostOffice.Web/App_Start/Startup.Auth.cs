@@ -76,10 +76,12 @@ namespace PostOffice.Web.App_Start
         {
             public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
             {
-                context.Validated();
+               
+               await Task.FromResult(context.Validated());
+
             }
 
-            public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+            public override async  Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
             {
                 var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
 

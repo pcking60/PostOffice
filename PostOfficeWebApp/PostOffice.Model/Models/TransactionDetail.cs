@@ -11,12 +11,19 @@ namespace PostOffice.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
+        public decimal Money { get; set; }
+
         [Required]
-        public int TransactionID { get; set; }
+        public int TransactionId { get; set; }
 
-        public int Quantity { get; set; }
+        public int PropertyServiceId { get; set; }
 
-        [ForeignKey("TransactionID")]
+        [ForeignKey("PropertyServiceId")]
+        [Column(Order = 1)]
+        public virtual PropertyService PropertyService { get; set; }
+
+        [ForeignKey("TransactionId")]
+        [Column(Order = 2)]
         public virtual Transaction Transaction { get; set; }
     }
 }

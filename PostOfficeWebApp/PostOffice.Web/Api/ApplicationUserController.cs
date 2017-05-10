@@ -1,213 +1,211 @@
-﻿using AutoMapper;
-using PostOffice.Model.Models;
-using PostOffice.Service;
-using PostOffice.Web.App_Start;
-using PostOffice.Web.Infrastructure.Core;
-using PostOffice.Web.Infrastructure.Extensions;
-using PostOffice.Web.Models;
-using PostOfiice.DAta.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-
-namespace PostOffice.Web.Api
-{
-    //[Authorize]
-    [RoutePrefix("api/applicationUser")]
-    public class ApplicationUserController : ApiControllerBase
-    {
-        private ApplicationUserManager _userManager;
-        private IApplicationGroupService _appGroupService;
-        private IPOService _poService;
-        private IApplicationRoleService _appRoleService;
-        private IApplicationUserService _userService;
-
-        public ApplicationUserController(
-            IApplicationGroupService appGroupService,
-            IApplicationRoleService appRoleService,
-            ApplicationUserManager userManager,
-            IPOService poService,
-            IApplicationUserService userService,
-            IErrorService errorService)
-            : base(errorService)
-        {
-            _appRoleService = appRoleService;
-            _appGroupService = appGroupService;
-            _userManager = userManager;
-            _poService = poService;
-            _userService = userService;
-        }
-
-        [Route("getlistpaging")]
-        [HttpGet]
-        [Authorize(Roles = "ViewUser")]
-        public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                HttpResponseMessage response = null;
-                int totalRow = 0;
-                var model = _userManager.Users;
-                IEnumerable<ApplicationUserViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserViewModel>>(model);
-
-                foreach (var item in modelVm) {
-                    var po = _poService.GetByID(item.POID);
-                    item.POName = po.Name;
-                }
-                PaginationSet<ApplicationUserViewModel> pagedSet = new PaginationSet<ApplicationUserViewModel>()
-                {
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
-                    Items = modelVm
-                };
-
-                response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
-
-                return response;
-            });
-        }
-
-        [Route("detail/{id}")]
-        [HttpGet]
-        [Authorize(Roles = "ViewUser")]
-        public HttpResponseMessage Details(HttpRequestMessage request, string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(id) + " không có giá trị.");
-            }
-            var user = _userManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return request.CreateErrorResponse(HttpStatusCode.NoContent, "Không có dữ liệu");
-            }
-            else
-            {
-                var applicationUserViewModel = Mapper.Map<ApplicationUser, ApplicationUserViewModel>(user.Result);
-                var listGroup = _appGroupService.GetListGroupByUserId(applicationUserViewModel.Id);
-                applicationUserViewModel.Groups = Mapper.Map<IEnumerable<ApplicationGroup>, IEnumerable<ApplicationGroupViewModel>>(listGroup);
-                return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
-            }
-        }
-        
-
-        [HttpPost]
-        [Route("add")]
-        [Authorize(Roles = "AddUser")]
-        public async Task<HttpResponseMessage> Create(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var newAppUser = new ApplicationUser();
-                newAppUser.UpdateUser(applicationUserViewModel);
-                try
-                {
-                    newAppUser.Id = Guid.NewGuid().ToString();
-                    var result = await _userManager.CreateAsync(newAppUser, applicationUserViewModel.Password);
-                    if (result.Succeeded)
-                    {
-                        var listAppUserGroup = new List<ApplicationUserGroup>();
-                        foreach (var group in applicationUserViewModel.Groups)
-                        {
-                            listAppUserGroup.Add(new ApplicationUserGroup()
-                            {
-                                GroupId = group.ID,
-                                UserId = newAppUser.Id
-                            });
-                            //add role to user
-                            var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
-                            foreach (var role in listRole)
-                            {
-                                await _userManager.RemoveFromRoleAsync(newAppUser.Id, role.Name);
-                                await _userManager.AddToRoleAsync(newAppUser.Id, role.Name);
-                            }
-                        }
-                        _appGroupService.AddUserToGroups(listAppUserGroup, newAppUser.Id);
-                        _appGroupService.Save();
-
-                        return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
-                    }
-                    else
-                        return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
-                }
-                catch (NameDuplicatedException dex)
-                {
-                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
-                }
-                catch (Exception ex)
-                {
-                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
-                }
-            }
-            else
-            {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-        }
-
-        [HttpPut]
-        [Route("update")]
-        [Authorize(Roles = "UpdateUser")]
-        public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var appUser = await _userManager.FindByIdAsync(applicationUserViewModel.Id);
-                try
-                {
-                    appUser.UpdateUser(applicationUserViewModel);
-                    var result = await _userManager.UpdateAsync(appUser);
-                    if (result.Succeeded)
-                    {
-                        var listAppUserGroup = new List<ApplicationUserGroup>();
-                        foreach (var group in applicationUserViewModel.Groups)
-                        {
-                            listAppUserGroup.Add(new ApplicationUserGroup()
-                            {
-                                GroupId = group.ID,
-                                UserId = applicationUserViewModel.Id
-                            });
-                            //add role to user
-                            var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
-                            foreach (var role in listRole)
-                            {
-                                await _userManager.RemoveFromRoleAsync(appUser.Id, role.Name);
-                                await _userManager.AddToRoleAsync(appUser.Id, role.Name);
-                            }
-                        }
-                        _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
-                        _appGroupService.Save();
-                        return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
-                    }
-                    else
-                        return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
-                }
-                catch (NameDuplicatedException dex)
-                {
-                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
-                }
-            }
-            else
-            {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-        }
-
-        [HttpDelete]
-        [Route("delete")]
-        [Authorize(Roles = "DeleteUser")]
-        public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
-        {
-            var appUser = await _userManager.FindByIdAsync(id);
-            var result = await _userManager.DeleteAsync(appUser);
-            if (result.Succeeded)
-                return request.CreateResponse(HttpStatusCode.OK, id);
-            else
-                return request.CreateErrorResponse(HttpStatusCode.OK, string.Join(",", result.Errors));
-        }
-    }
-}
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.Identity.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.Identity.EntityFramework.RoleStore`1">
+            <summary>
+                EntityFramework based implementation
+            </summary>
+            <typeparam name="TRole"></typeparam>
+        </member>
+        <member name="T:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3">
+            <summary>
+                EntityFramework based implementation
+            </summary>
+            <typeparam name="TRole"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TUserRole"></typeparam>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.#ctor(System.Data.Entity.DbContext)">
+            <summary>
+                Constructor which takes a db context and wires up the stores with default instances using the context
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.FindByIdAsync(`1)">
+            <summary>
+                Find a role by id
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.FindByNameAsync(System.String)">
+            <summary>
+                Find a role by name
+            </summary>
+            <param name="roleName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.CreateAsync(`0)">
+            <summary>
+                Insert an entity
+            </summary>
+            <param name="role"></param>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.DeleteAsync(`0)">
+            <summary>
+                Mark an entity for deletion
+            </summary>
+            <param name="role"></param>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.UpdateAsync(`0)">
+            <summary>
+                Update an entity
+            </summary>
+            <param name="role"></param>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.Dispose">
+            <summary>
+                Dispose the store
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.Dispose(System.Boolean)">
+            <summary>
+                If disposing, calls dispose on the Context.  Always nulls out the Context
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="P:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.Context">
+            <summary>
+                Context for the store
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.DisposeContext">
+            <summary>
+                If true will call dispose on the DbContext during Dipose
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.Identity.EntityFramework.RoleStore`3.Roles">
+            <summary>
+                Returns an IQueryable of users
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`1.#ctor">
+            <summary>
+                Constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.RoleStore`1.#ctor(System.Data.Entity.DbContext)">
+            <summary>
+                Constructor
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Microsoft.AspNet.Identity.EntityFramework.UserStore`1">
+            <summary>
+                EntityFramework based user store implementation that supports IUserStore, IUserLoginStore, IUserClaimStore and
+                IUserRoleStore
+            </summary>
+            <typeparam name="TUser"></typeparam>
+        </member>
+        <member name="T:Microsoft.AspNet.Identity.EntityFramework.UserStore`6">
+            <summary>
+                EntityFramework based user store implementation that supports IUserStore, IUserLoginStore, IUserClaimStore and
+                IUserRoleStore
+            </summary>
+            <typeparam name="TUser"></typeparam>
+            <typeparam name="TRole"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TUserLogin"></typeparam>
+            <typeparam name="TUserRole"></typeparam>
+            <typeparam name="TUserClaim"></typeparam>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.#ctor(System.Data.Entity.DbContext)">
+            <summary>
+                Constructor which takes a db context and wires up the stores with default instances using the context
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.GetClaimsAsync(`0)">
+            <summary>
+                Return the claims for a user
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.AddClaimAsync(`0,System.Security.Claims.Claim)">
+            <summary>
+                Add a claim to a user
+            </summary>
+            <param name="user"></param>
+            <param name="claim"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.RemoveClaimAsync(`0,System.Security.Claims.Claim)">
+            <summary>
+                Remove a claim from a user
+            </summary>
+            <param name="user"></param>
+            <param name="claim"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.GetEmailConfirmedAsync(`0)">
+            <summary>
+                Returns whether the user email is confirmed
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.SetEmailConfirmedAsync(`0,System.Boolean)">
+            <summary>
+                Set IsConfirmed on the user
+            </summary>
+            <param name="user"></param>
+            <param name="confirmed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.SetEmailAsync(`0,System.String)">
+            <summary>
+                Set the user email
+            </summary>
+            <param name="user"></param>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.GetEmailAsync(`0)">
+            <summary>
+                Get the user's email
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.FindByEmailAsync(System.String)">
+            <summary>
+                Find a user by email
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.GetLockoutEndDateAsync(`0)">
+            <summary>
+                Returns the DateTimeOffset that represents the end of a user's lockout, any time in the past should be considered
+                not locked out.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.SetLockoutEndDateAsync(`0,System.DateTimeOffset)">
+            <summary>
+                Locks a user out until the specified end date (set to a past date, to unlock a user)
+            </summary>
+            <param name="user"></param>
+            <param name="lockoutEnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.IncrementAccessFailedCountAsync(`0)">
+            <summary>
+                Used to record when an attempt to access the user has failed
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNet.Identity.EntityFramework.UserStore`6.ResetAccessFailedCountAsync(`0)">
+            <summary>
+                Used to reset the account access count, typically after the account is successfully accessed
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="

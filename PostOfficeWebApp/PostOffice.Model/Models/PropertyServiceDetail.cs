@@ -12,22 +12,22 @@ namespace PostOffice.Model.Models
         public int Id { get; set; }
         public decimal? Money { get; set; }
         
-        public int TransactionDetailId { get; set; }
-        public int PropertyServiceId { get; set; }
+        //public int TransactionDetailId { get; set; }
+        //public int PropertyServiceId { get; set; }
 
-        public int ServiceId { get; set; }
+        //public int ServiceId { get; set; }
 
-        [ForeignKey("TransactionDetailId")]
-        [Column(Order =1)]
-        public virtual TransactionDetail TransactionDetail { get; set; }
+        //[ForeignKey("TransactionDetailId")]
+        //[Column(Order =1)]
+        //public virtual TransactionDetail TransactionDetail { get; set; }
 
-        [ForeignKey("PropertyServiceId")]
-        [Column(Order = 2)]
-        public virtual PropertyService PropertyService { get; set; }
+        //[ForeignKey("PropertyServiceId")]
+        //[Column(Order = 2)]
+        //public virtual PropertyService PropertyService { get; set; }
 
-        [ForeignKey("PropertyServiceId")]
-        [Column(Order = 3)]
-        public virtual Service Service { get; set; }
+        //[ForeignKey("ServiceId")]
+        //[Column(Order = 3)]
+        //public virtual Service Service { get; set; }
 
 
     }

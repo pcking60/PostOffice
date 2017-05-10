@@ -10,18 +10,19 @@ namespace PostOffice.Model.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
         [DataType("nvarchar")]
         [MaxLength(128)]
         public string Name { get; set; }
 
-        public decimal? Percent { get; set; }
+        public decimal Percent { get; set; }
 
         [Required]
-        public int ServiceID { get; set; }
+        public int ServiceId { get; set; }
 
-        [ForeignKey("ServiceID")]
+        [ForeignKey("ServiceId")]
         public virtual Service Service { get; set; }
 
-        
+
     }
 }

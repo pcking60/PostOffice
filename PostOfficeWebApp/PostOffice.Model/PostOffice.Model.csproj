@@ -97,7 +97,6 @@
     <Compile Include="Models\PropertyPO.cs" />
     <Compile Include="Models\PropertyService.cs" />
     <Compile Include="Models\Service.cs" />
-    <Compile Include="Models\ServiceDetail.cs" />
     <Compile Include="Models\ServiceGroup.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\District.cs" />
@@ -109,7 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

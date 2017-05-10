@@ -17,7 +17,6 @@ namespace PostOfiice.DAta
 
         public DbSet<PO> PostOffices { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceDetail> ServiceDetails { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
 
         public DbSet<Error> Errors { get; set; }

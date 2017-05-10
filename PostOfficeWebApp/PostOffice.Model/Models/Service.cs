@@ -30,17 +30,16 @@ namespace PostOffice.Model.Models
         public decimal? BuyIn { get; set; }
         public decimal? SoldOut { get; set; }
         public float? VAT { get; set; }
-        public int? PayMethodID { get; set; }
+        //public int? PayMethodID { get; set; }
 
-        [ForeignKey("PayMethodID")]
-        public virtual IEnumerable<PaymentMethod> PaymentMethods { get; set; }
+        //[ForeignKey("PayMethodID")]
+        //public virtual IEnumerable<PaymentMethod> PaymentMethods { get; set; }
 
         [MaxLength(256)]
         public string Description { get; set; }
 
         [ForeignKey("GroupID")]
         public virtual ServiceGroup ServiceGroup { get; set; }
-
         
         public virtual IEnumerable<PropertyService> PropertyServices { get; set; }
     }

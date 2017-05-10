@@ -120,6 +120,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -129,6 +133,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
       <Private>True</Private>
@@ -230,6 +238,13 @@
     <Content Include="app\components\pos\poEditController.js" />
     <Content Include="app\components\pos\poEditView.html" />
     <Content Include="app\components\pos\poView.html" />
+    <Content Include="app\components\properties\propertyAddController.js" />
+    <Content Include="app\components\properties\propertyAddView.html" />
+    <Content Include="app\components\properties\propertyEditController.js" />
+    <Content Include="app\components\properties\propertyEditView.html" />
+    <Content Include="app\components\properties\propertyListController.js" />
+    <Content Include="app\components\properties\propertyListView.html" />
+    <Content Include="app\components\properties\properties.modulde.js" />
     <Content Include="app\components\services\serviceAddController.js" />
     <Content Include="app\components\services\serviceAddView.html" />
     <Content Include="app\components\services\serviceEditController.js" />
@@ -5284,8 +5299,9 @@
     <Compile Include="Api\ApplicationGroupController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
-    <Compile Include="Api\DistrictService.cs" />
+    <Compile Include="Api\DistrictController.cs" />
     <Compile Include="Api\PoController.cs" />
+    <Compile Include="Api\PropertyServiceController.cs" />
     <Compile Include="Api\ServiceController.cs" />
     <Compile Include="Api\ServiceGroupController.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -5307,13 +5323,13 @@
     <Compile Include="Models\DistrictViewModel.cs" />
     <Compile Include="Models\PaymentMethodViewModel.cs" />
     <Compile Include="Models\POViewModel.cs" />
+    <Compile Include="Models\PropertyServiceViewModel.cs" />
     <Compile Include="Models\ServiceGroupViewModel.cs" />
     <Compile Include="Models\ServiceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="packages.config" />
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="Assets\admin\libs\angular-loading-bar\.bower.json" />
@@ -5652,6 +5668,9 @@
     <Content Include="Assets\admin\libs\moment\LICENSE" />
     <Content Include="Assets\admin\libs\moment\README.md" />
     <Content Include="Assets\admin\libs\moment\scripts\npm_prepublish.sh" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,12 +13,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Script.Serialization;
 
 namespace PostOffice.Web.Api
 {
+    
     [RoutePrefix("api/applicationGroup")]
-    [Authorize]
+   [Authorize]
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;
