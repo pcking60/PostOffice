@@ -9,5 +9,9 @@ namespace PostOffice.Web.Models
         public string Name { get; set; }
 
         public IEnumerable<ApplicationRoleViewModel> Roles { set; get; }
+
+        #region
+        public int NoUser { get; set; }
+        #endregion
     }
 }

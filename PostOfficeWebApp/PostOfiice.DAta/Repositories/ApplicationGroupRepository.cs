@@ -38,6 +38,6 @@ namespace PostOfiice.DAta.Repositories
                         where ug.GroupId == groupId
                         select u;
             return query;
-        }
+        }       
     }
 }

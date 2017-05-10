@@ -8,6 +8,7 @@ namespace PostOfiice.DAta.Repositories
     public interface IApplicationUserRepository : IRepository<ApplicationUser>
     {
         int getNoUserByPoID(int PoID);
+        int getNoUserByGroup(int GroupId);
         string getIdByUserName(string userName);
     }
 
@@ -23,9 +24,24 @@ namespace PostOfiice.DAta.Repositories
             return user.Id;
         }
 
+        public int getNoUserByGroup(int GroupId)
+        {
+            var query = from ug in this.DbContext.ApplicationUserGroups
+                        join g in this.DbContext.ApplicationGroups
+                        on ug.GroupId equals g.ID
+                        join u in this.DbContext.Users
+                        on ug.UserId equals u.Id
+                        where g.ID == GroupId
+                        select u;
+            return query.Count();
+               
+        }
+
         public int getNoUserByPoID(int PoID)
         {
             return this.DbContext.Users.Where(x => x.POID == PoID).Count();
         }
+
+       
     }
 }

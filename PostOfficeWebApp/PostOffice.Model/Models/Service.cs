@@ -33,12 +33,14 @@ namespace PostOffice.Model.Models
         public int? PayMethodID { get; set; }
 
         [ForeignKey("PayMethodID")]
+        [Column(Order =1)]
         public virtual IEnumerable<PaymentMethod> PaymentMethods { get; set; }
 
         [MaxLength(256)]
         public string Description { get; set; }
 
         [ForeignKey("GroupID")]
+        [Column(Order = 2)]
         public virtual ServiceGroup ServiceGroup { get; set; }
 
         

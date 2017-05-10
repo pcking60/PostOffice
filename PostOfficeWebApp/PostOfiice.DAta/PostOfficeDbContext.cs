@@ -17,7 +17,6 @@ namespace PostOfiice.DAta
 
         public DbSet<PO> PostOffices { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceDetail> ServiceDetails { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
 
         public DbSet<Error> Errors { get; set; }
@@ -29,9 +28,7 @@ namespace PostOfiice.DAta
         public DbSet<ApplicationRole> ApplicationRoles { set; get; }
         public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { set; get; }
         public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
-
-        public DbSet<PropertyPO> PropertyPOs { set; get; }
-        public DbSet<PropertyServiceDetail> PropertyServiceDetails { set; get; }
+        
         public DbSet<Percent> Percents { set; get; }
         public DbSet<PropertyService> PropertyServices { set; get; }
 

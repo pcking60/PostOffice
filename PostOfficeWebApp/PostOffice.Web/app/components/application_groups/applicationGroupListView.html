@@ -5,8 +5,8 @@
 
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li><a href="#">Nhóm người dùng</a></li>
+    <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+    <li><a ui-sref="application_groups">Nhóm người dùng</a></li>
     <li class="active">Danh mục nhóm</li>
   </ol>
 </section>
@@ -15,22 +15,10 @@
   <!-- Default box -->
   <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Danh mục nhóm</h3>
-      <div class="box-tools pull-right">
-        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-        <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-      </div>
+      <h3 class="box-title">Danh mục nhóm người dùng</h3>      
     </div>
     <div class="box-body">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="keyword" placeholder="Từ khóa">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
-            </span>
-          </div><!-- /input-group -->
-        </div>
+      <div class="row">        
         <div class="col-md-6">
           <button class="btn btn-success" ui-sref="add_application_group">Thêm mới</button>
           <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
@@ -40,23 +28,31 @@
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered">
-            <tr>
-              <td style="width: 5%" class="text-center text-bold"><input name="all" type="checkbox" ng-click="selectAll()" /></td>
-              <th style="width: 5%" class="text-center text-bold">ID</th>
-              <th style="width:10%" class="text-center text-bold">Tên nhóm</th>
-                <th style="width:20%" class="text-center text-bold">Quyền</th>
-                <th style="width: 15%" class="text-center text-bold">Ngày tạo</th>
-                <th style="width: 15%" class="text-center text-bold">Ngày cập nhật</th>
-              <th style="width: 20%" class="text-center text-bold">Mô tả</th>
-              <th style="width: 10%" class="text-center text-bold">Thao tác</th>
-            </tr>
-            <tr ng-repeat="item in data">
+              <thead>
+                  <tr>
+                      <td style="width: 5%" class="text-center text-bold"><input name="all" type="checkbox" ng-click="selectAll()" /></td>
+                      <th style="width: 5%" class="text-center text-bold">ID</th>
+                      <th style="width:30%" class="text-center text-bold">Tên nhóm</th>
+                      <th style="width:15%" class="text-center text-bold">Số lượng user</th>
+                      <th style="width: 30%" class="text-center text-bold">Mô tả</th>
+                      <th style="width: 15%" class="text-center text-bold">Thao tác</th>
+                  </tr>
+                  <tr>
+                      <th></th>
+                      <th></th>
+                      <th><input type="text" class="form-control" ng-model="SmartSearch.Name" placeholder="auto search..."></th>
+                      <th><input type="text" class="form-control" ng-model="SmartSearch.NoUser" placeholder="auto search..."></th>                      
+                      <th><input type="text" class="form-control" ng-model="SmartSearch.Description" placeholder="auto search..."></th>
+                      <th></th>
+                      
+                  </tr>
+              </thead>
+            <tr ng-repeat="item in data| filter: SmartSearch">
               <td class="text-center"><input type="checkbox" ng-model="item.checked" name="all" /></td>
               <td class="text-center">{{item.ID}}</td>
               <td><a ui-sref="edit_application_group({id:item.ID})">{{item.Name}}</a></td>
-                <td></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
+                <td class="text-center">{{item.NoUser}}</td>
+               
               <td>
                 {{item.Description}}
               </td>

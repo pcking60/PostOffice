@@ -24,14 +24,17 @@ namespace PostOffice.Web.Api
         private IApplicationGroupService _appGroupService;
         private IApplicationRoleService _appRoleService;
         private ApplicationUserManager _userManager;
+        private IApplicationUserService _userService;
 
         public ApplicationGroupController(IErrorService errorService,
             IApplicationRoleService appRoleService,
             ApplicationUserManager userManager,
+            IApplicationUserService userService,
             IApplicationGroupService appGroupService) : base(errorService)
         {
             _appGroupService = appGroupService;
             _appRoleService = appRoleService;
+            _userService = userService;
             _userManager = userManager;
         }
 
@@ -53,6 +56,11 @@ namespace PostOffice.Web.Api
                     TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize),
                     Items = modelVm
                 };
+                foreach (var item in modelVm)
+                {
+                    int NoUser = _appGroupService.GetListUserByGroupId(item.ID).Count();
+                    item.NoUser = NoUser;
+                }
 
                 response = request.CreateResponse(HttpStatusCode.OK, pagedSet);
 
@@ -72,6 +80,7 @@ namespace PostOffice.Web.Api
 
                 response = request.CreateResponse(HttpStatusCode.OK, modelVm);
 
+              
                 return response;
             });
         }

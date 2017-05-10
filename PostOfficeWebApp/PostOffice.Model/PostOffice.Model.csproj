@@ -93,11 +93,8 @@
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Percent.cs" />
     <Compile Include="Models\PO.cs" />
-    <Compile Include="Models\PropertyServiceDetail.cs" />
-    <Compile Include="Models\PropertyPO.cs" />
     <Compile Include="Models\PropertyService.cs" />
     <Compile Include="Models\Service.cs" />
-    <Compile Include="Models\ServiceDetail.cs" />
     <Compile Include="Models\ServiceGroup.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\District.cs" />

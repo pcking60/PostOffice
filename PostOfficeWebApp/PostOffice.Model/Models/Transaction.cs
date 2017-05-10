@@ -19,12 +19,7 @@ namespace PostOffice.Model.Models
 
         public int TransactionDetailId { get; set; }
 
-        [ForeignKey("TransactionDetailId")]
-        [Column(Order =1)]
-        public virtual IEnumerable<TransactionDetail> TransactionDetails { get; set; }
-
         [ForeignKey("UserId")]
-        [Column(Order = 2)]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
