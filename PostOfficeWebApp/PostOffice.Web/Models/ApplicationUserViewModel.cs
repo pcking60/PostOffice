@@ -12,11 +12,15 @@ namespace PostOffice.Web.Models
         public string Email { set; get; }
         public string Password { set; get; }
         public string UserName { set; get; }
-        public int POID { get; set; }
-        public string POName { get; set; }
+        public int POID { get; set; }        
         public string PhoneNumber { set; get; }
         public bool Status { get; set; }
 
         public IEnumerable<ApplicationGroupViewModel> Groups { set; get; }
+
+        #region
+        public string POName { get; set; }
+        public string GroupName { get; set; }
+        #endregion
     }
 }

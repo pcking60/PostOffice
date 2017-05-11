@@ -25,5 +25,9 @@ namespace PostOfiice.DAta.Repositories
                         select g;
             return query;
         }
+        public override ApplicationRole Add(ApplicationRole entity)
+        {
+            return base.Add(entity);
+        }
     }
 }

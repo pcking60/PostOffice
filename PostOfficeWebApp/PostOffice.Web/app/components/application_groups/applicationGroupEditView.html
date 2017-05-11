@@ -26,15 +26,13 @@
                          required reqired-message="Tên nhóm bắt buộc." ng-model="group.Name">
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div ng-repeat="role in roles" class="checkbox icheck">
+              <div class="form-group">              
+                    <label class="col-sm-2 control-label">Chọn quyền</label>
+                    <div ng-repeat="role in roles" class="checkbox col-sm-10 col-sm-offset-2">
                         <label>
                             <input type="checkbox" checklist-model="group.Roles" checklist-value="role"> {{role.Description}}
                         </label>
-                    </div>
-                  
-                </div>
+                    </div>  
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">

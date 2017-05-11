@@ -5,8 +5,7 @@
 
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li><a href="#">Nhóm quyền</a></li>
+    <li><a ui-sref="home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
     <li class="active">Danh mục quyền</li>
   </ol>
 </section>
@@ -22,15 +21,7 @@
       </div>
     </div>
     <div class="box-body">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="keyword" placeholder="Từ khóa">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
-            </span>
-          </div><!-- /input-group -->
-        </div>
+      <div class="row">        
         <div class="col-md-6">
           <button class="btn btn-success" ui-sref="add_application_role">Thêm mới</button>
           <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
@@ -40,19 +31,23 @@
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered">
-            <tr>         
-                <th style="width:5%" class="text-center text-bold"><input name="all" type="checkbox" ng-click="selectAll()" /></th>
-                <th style="width:20%" class="text-center text-bold">Tên quyền</th>
-                <th style="width: 15%" class="text-center text-bold">Ngày tạo</th>
-                <th style="width: 15%" class="text-center text-bold">Ngày cập nhật</th>
-                <th style="width: 35%" class="text-center text-bold">Mô tả</th>
-                <th style="width: 10%" class="text-center text-bold">Thao tác</th>
-            </tr>
-            <tr ng-repeat="item in data">
+            <thead>
+                <tr>         
+                    <th style="width:5%" class="text-center text-bold"><input name="all" type="checkbox" ng-click="selectAll()" /></th>
+                    <th style="width:20%" class="text-center text-bold">Tên quyền</th>
+                    <th style="width: 35%" class="text-center text-bold">Mô tả</th>
+                    <th style="width: 10%" class="text-center text-bold">Thao tác</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input type="text" class="form-control" ng-model="SmartSearch.Name" placeholder="auto search..."></th>
+                    <th><input type="text" class="form-control" ng-model="SmartSearch.Description" placeholder="auto search..."></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr ng-repeat="item in data | filter: SmartSearch">
               <td class="text-center"><input type="checkbox" ng-model="item.checked" name="all" /></td>
-              <td><a ui-sref="edit_application_role({id:item.Id})">{{item.Name}}</a></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
+              <td><a ui-sref="edit_application_role({id:item.Id})">{{item.Name}}</a></td>                
               <td>
                 {{item.Description}}
               </td>                
@@ -63,7 +58,7 @@
             </tr>
             <tfoot>
               <tr>
-                <td colspan="6"><span class="pull-right">Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</span></td>
+                <td colspan="4"><span class="pull-right">Trang: {{page+1}} - Tổng số bản ghi: {{totalCount}}</span></td>
               </tr>
             </tfoot>
           </table>
