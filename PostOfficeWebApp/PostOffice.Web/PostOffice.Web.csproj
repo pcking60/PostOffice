@@ -5287,6 +5287,7 @@
     <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\DistrictService.cs" />
     <Compile Include="Api\PoController.cs" />
+    <None Include="Api\ServiceControll" />
     <Compile Include="Api\ServiceController.cs" />
     <Compile Include="Api\ServiceGroupController.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />

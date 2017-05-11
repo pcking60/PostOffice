@@ -8,12 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace PostOffice.Web.Api
 {
     [RoutePrefix("api/service")]
+    [Authorize]
     public class ServiceController : ApiControllerBase
     {
         private IServiceService _serviceService;
@@ -25,7 +25,7 @@ namespace PostOffice.Web.Api
             this._serviceGroupService = serviceGroupService;
         }
 
-        [Route("update")]
+        [Route("edit")]
         [HttpPut]
         [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, ServiceViewModel serviceVm)
@@ -54,7 +54,7 @@ namespace PostOffice.Web.Api
         [HttpDelete]
         [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
-        { 
+        {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
@@ -113,6 +113,7 @@ namespace PostOffice.Web.Api
         }
 
         [Route("getall")]
+        [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
@@ -123,12 +124,12 @@ namespace PostOffice.Web.Api
                 var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
                 var responseData = Mapper.Map<IEnumerable<PostOffice.Model.Models.Service>, IEnumerable<ServiceViewModel>>(query);
 
-                foreach(var item in responseData)
+                foreach (var item in responseData)
                 {
                     var sv = _serviceGroupService.GetById(item.GroupID);
                     item.GroupName = sv.Name;
                 }
-                
+
                 var paginationSet = new PaginationSet<ServiceViewModel>
                 {
                     Items = responseData,
@@ -141,5 +142,4 @@ namespace PostOffice.Web.Api
             });
         }
     }
-
 }

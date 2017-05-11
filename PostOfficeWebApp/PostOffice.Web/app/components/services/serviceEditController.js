@@ -20,7 +20,7 @@
             });
         }
         function EditService() {
-            apiService.put('/api/service/update', $scope.service,
+            apiService.put('/api/service/edit', $scope.service,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + ' được cập nhật thành công');
                     $state.go('services');

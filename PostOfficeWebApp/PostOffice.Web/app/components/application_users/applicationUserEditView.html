@@ -17,8 +17,8 @@
         </div><!-- /.box-header -->
         <!-- form start -->
         <form class="form-horizontal" role="form" novalidate name="frmUpdateAccount" ng-submit="updateAccount()">
-          <div class="box-body">
-            <div class="col-md-8">
+            <div class="box-body">
+            <div class="col-md-10">
               <div class="form-group" ng-class="{ 'has-error' : frmUpdateAccount.name.$invalid && !frmUpdateAccount.name.$pristine }">
                 <label class="col-sm-2 control-label">Họ tên người dùng</label>
                 <div class="col-sm-10">
@@ -54,13 +54,27 @@
                          required reqired-message="Ngày sinh bắt buộc." ng-model="account.BirthDay">
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <label ng-repeat="group in groups">
-                    <input type="checkbox" checklist-model="account.Groups" checklist-value="group"> {{group.Name}}
-                  </label>
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">
+                    <label for="inputPassword3">Thuộc nhóm </label>
+                    </div>
+                  
+                    <div class="checkbox col-sm-10" >
+                      <label ng-repeat="group in groups" class="checkbox">
+                        <input type="checkbox" checklist-model="account.Groups" checklist-value="group"> {{group.Name}}
+                      </label>
+                    </div>
                 </div>
-              </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Trạng thái</label>
+                    <div class="checkbox col-sm-10" >
+                        <label>
+                            <input type="checkbox" name="status" ng-model="account.Status" ng-checked="account.Status"> Kích hoạt
+                        </label>
+                    </div>
+                 </div>
+              
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <a ui-sref="application_users" class="btn btn-default">Hủy bỏ</a>
