@@ -1,8 +1,6 @@
 ﻿(function (app) {
     app.controller('loginController', ['$scope', 'authService', '$injector', 'notificationService',
         function ($scope, authService, $injector, notificationService) {
-            
-           
 
             $scope.loginData = {
                 userName: "",

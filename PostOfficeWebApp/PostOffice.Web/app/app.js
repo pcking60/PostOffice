@@ -10,8 +10,7 @@ angular.module('postoffice',
                 'postoffice.service_groups',
                 'postoffice.pos',
                 'angular-loading-bar',
-                'LocalStorageModule',
-                'ngMaterial', 
+                'LocalStorageModule',                
                 'ngCookies',
                 'ngBootstrap',
                 'postoffice.common'
@@ -23,17 +22,19 @@ angular.module('postoffice',
         //    requireBase: false,
         //    hashPrefix: ''
         //})
-           
+
         $stateProvider
             .state('base', {
                 url: '',
                 templateUrl: '/app/shared/views/baseView.html',
                 abstract: true
-            }).state('userbase', {
+            })
+            .state('userbase', {
                 url: '',
                 templateUrl: '/app/shared/views/userBaseView.html',
                 abstract: true
-            }).state('login', {
+            })
+            .state('login', {
                 url: "/login",
                 templateUrl: "/app/components/login/loginView.html",
                 controller: "loginController"
@@ -45,7 +46,7 @@ angular.module('postoffice',
                 controller: "userDashboardController"
             })
             .state('home', {
-                url: "/",
+                url: "/admin",
                 parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
@@ -58,13 +59,13 @@ angular.module('postoffice',
     })
 
     .run(['authService', function (authService) {
-        authService.fillAuthData()
+        authService.fillAuthData();
     }])
 
-    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeBar = true;
         cfpLoadingBarProvider.includeSpinner = true;
-    }])
+    }]);
 
   
 

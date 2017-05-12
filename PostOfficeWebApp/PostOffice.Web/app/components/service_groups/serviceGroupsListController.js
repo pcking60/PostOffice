@@ -12,7 +12,7 @@
         $scope.deleteServiceGroup = deleteServiceGroup;
         $scope.selectAll = selectAll;
         $scope.deleteMulti = deleteMulti;
-
+        $scope.loading = true;
         
         function deleteMulti() {
             var listId = [];
@@ -93,14 +93,16 @@
             apiService.get('/api/servicegroup/getall', config, function (result) {
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning("Chưa có dữ liệu");
+                    
                 }
-               
+                $scope.loading = false;
                 $scope.serviceGroups = result.data.Items;                
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
             },
             function () {
+                $scope.loading = false;
                 console.log('Load servicegroups failed');
             });
 

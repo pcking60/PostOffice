@@ -1,7 +1,7 @@
 ﻿/// <reference path="/Assets/admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module('postoffice.application_users', ['postoffice.common']).config(config);
+    angular.module('postoffice.application_users', ['postoffice.common', 'ngMaterial', 'ngMessages']).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 

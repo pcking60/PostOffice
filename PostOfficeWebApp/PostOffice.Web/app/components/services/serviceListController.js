@@ -9,6 +9,7 @@
         $scope.keyword = '';
         $scope.search = search;
         $scope.deleteService = deleteService;
+        $scope.loading = true;
         function deleteService(id) {
             $ngBootbox.confirm('Bạn có chắc xóa không?')
                 .then(
@@ -53,6 +54,7 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning("Chưa có dữ liệu");
                 }
+                $scope.loading = false;
                 $scope.services = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
@@ -60,6 +62,7 @@
             },
             function () {
                 console.log('Load service failed');
+                $scope.loading = false;
             });
         } $scope.getServices();
     }

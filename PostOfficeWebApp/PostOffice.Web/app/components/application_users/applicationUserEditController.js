@@ -18,7 +18,8 @@
             apiService.get('/api/applicationUser/detail/' + $stateParams.id, null,
             function (result) {
                 $scope.account = result.data;
-                $scope.account.BirthDay = $filter('date')($scope.account.BirthDay, "dd/MM/yyyy");
+                $scope.account.BirthDay = new Date($scope.account.BirthDay);
+                //$scope.account.BirthDay = $filter('date')($scope.account.BirthDay, "dd/MM/yyyy");
                 console.log($scope.account.BirthDay);
             },
             function (result) {

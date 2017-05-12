@@ -8,6 +8,7 @@
     "ng-material": "*"
   },
   "resolutions": {
-    "bootstrap": ">= 3.0.0"
+    "bootstrap": ">= 3.0.0",
+    "angular": "1.6.5-build.5353+sha.136a42a"
   }
 }

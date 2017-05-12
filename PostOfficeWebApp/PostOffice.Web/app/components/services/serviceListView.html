@@ -73,6 +73,13 @@
                         </tfoot>
                     </table>
                 </div>
+                <div ng-if="loading">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <i class="fa fa-spinner fa-3x fa-spin"></i> <label class="label label-primary"></label>
+                    </div>
+                    <div class="col-xs-4"></div>
+                </div>
             </div>
         </div><!-- /.box-body -->
         <div class="box-footer">
