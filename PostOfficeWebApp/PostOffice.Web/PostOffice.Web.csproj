@@ -244,6 +244,8 @@
     <Content Include="app\components\service_groups\serviceGroups.module.js" />
     <Content Include="app\components\service_groups\serviceGroupsListController.js" />
     <Content Include="app\components\service_groups\serviceGroupsListView.html" />
+    <Content Include="app\components\user_dashboard\userDashboardController.js" />
+    <Content Include="app\components\user_dashboard\userDashboardView.html" />
     <Content Include="app\shared\directives\asDateDirective.js" />
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDirective.js" />
@@ -254,6 +256,7 @@
     <Content Include="app\shared\services\authService.js" />
     <Content Include="app\shared\services\commonService.js" />
     <Content Include="app\shared\services\notificationService.js" />
+    <Content Include="app\shared\views\userBaseView.html" />
     <Content Include="app\shared\views\baseView.html" />
     <Content Include="Assets\admin\css\AdminLTE.css" />
     <Content Include="Assets\admin\css\AdminLTE.min.css" />

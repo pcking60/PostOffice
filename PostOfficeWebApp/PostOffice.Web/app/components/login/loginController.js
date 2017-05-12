@@ -16,7 +16,7 @@
                     }
                     else {
                         var stateService = $injector.get('$state');
-                        stateService.go('home');                       
+                        stateService.go('user_dashboard');
                     }
                 });
             }

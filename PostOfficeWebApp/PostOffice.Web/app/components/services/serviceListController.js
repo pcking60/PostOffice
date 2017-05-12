@@ -17,8 +17,8 @@
                             {
                                 params: {
                                     id: id
+                                }
                             }
-                    }
 
                 apiService.del(
                     '/api/service/delete',

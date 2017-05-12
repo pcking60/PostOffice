@@ -157,7 +157,7 @@ namespace PostOffice.Web.Api
                     var oldServiceGroup = _serviceGroupService.Delete(id);
                     _serviceGroupService.Save();
                     var responseData = Mapper.Map<ServiceGroup, ServiceGroupViewModel>(oldServiceGroup);
-                    response = request.CreateResponse(HttpStatusCode.Moved, responseData);
+                    response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 }
                 return response;
             });

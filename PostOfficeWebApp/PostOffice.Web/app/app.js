@@ -28,13 +28,23 @@ angular.module('postoffice',
                 url: '',
                 templateUrl: '/app/shared/views/baseView.html',
                 abstract: true
+            }).state('userbase', {
+                url: '',
+                templateUrl: '/app/shared/views/userBaseView.html',
+                abstract: true
             }).state('login', {
                 url: "/login",
                 templateUrl: "/app/components/login/loginView.html",
                 controller: "loginController"
             })
+            .state('user_dashboard', {
+                url: "/user_dashboard",
+                parent: 'userbase',
+                templateUrl: "/app/components/user_dashboard/userDashboardView.html",
+                controller: "userDashboardController"
+            })
             .state('home', {
-                url: "/admin",
+                url: "/",
                 parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
