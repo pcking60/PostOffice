@@ -90,6 +90,7 @@
     <Compile Include="Abstract\Auditable.cs" />
     <Compile Include="Abstract\IAuditable.cs" />
     <Compile Include="Models\ApplicationUserGroup.cs" />
+    <Compile Include="Models\MainServiceGroup.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Percent.cs" />
     <Compile Include="Models\PO.cs" />

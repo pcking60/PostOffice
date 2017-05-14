@@ -237,6 +237,13 @@
     <Content Include="app\components\services\serviceListController.js" />
     <Content Include="app\components\services\serviceListView.html" />
     <Content Include="app\components\services\services.modulde.js" />
+    <Content Include="app\components\main_service_groups\mainServiceGroupAddController.js" />
+    <Content Include="app\components\main_service_groups\mainServiceGroupAddView.html" />
+    <Content Include="app\components\main_service_groups\mainServiceGroupEditController.js" />
+    <Content Include="app\components\main_service_groups\mainServiceGroupEditView.html" />
+    <Content Include="app\components\main_service_groups\mainServiceGroups.module.js" />
+    <Content Include="app\components\main_service_groups\mainServiceGroupsListController.js" />
+    <Content Include="app\components\main_service_groups\mainServiceGroupsListView.html" />
     <Content Include="app\components\service_groups\serviceGroupAddController.js" />
     <Content Include="app\components\service_groups\serviceGroupAddView.html" />
     <Content Include="app\components\service_groups\serviceGroupEditController.js" />
@@ -5301,6 +5308,7 @@
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\DistrictService.cs" />
+    <Compile Include="Api\MainServiceGroupController.cs" />
     <Compile Include="Api\PoController.cs" />
     <Compile Include="Api\ServiceController.cs" />
     <Compile Include="Api\ServiceGroupController.cs" />
@@ -5321,6 +5329,7 @@
     <Compile Include="Models\ApplicationRoleViewModel.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\DistrictViewModel.cs" />
+    <Compile Include="Models\MainServiceGroupViewModel.cs" />
     <Compile Include="Models\PaymentMethodViewModel.cs" />
     <Compile Include="Models\POViewModel.cs" />
     <Compile Include="Models\ServiceGroupViewModel.cs" />

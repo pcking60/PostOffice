@@ -1,28 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace PostOffice.Web.Models
 {
-    public class ServiceGroupViewModel
+    public class MainServiceGroupViewModel
     {
-        public int ID { get; set; }
-
-        [Required]
+        public int Id { get; set; }
         public string Name { get; set; }
+        public int NoGroupService { get; set; }
 
-        [Required]
-        public string Alias { get; set; }
+        #region
 
-        public string Description { get; set; }
-
-        public int? MainServiceGroupId { get; set; }
-
-        public int? DisplayOrder { get; set; }
-
-        public string Image { get; set; }
-
-        //[2]
         public string CreatedBy
         {
             get; set;
@@ -59,7 +50,6 @@ namespace PostOffice.Web.Models
             get; set;
         }
 
-        public virtual IEnumerable<ServiceViewModel> Services { get; set; }
-        public int NoService { get; set; }
+        #endregion
     }
 }

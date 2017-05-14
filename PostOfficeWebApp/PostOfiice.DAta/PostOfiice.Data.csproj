@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201705101422110_InitialDB.Designer.cs">
       <DependentUpon>201705101422110_InitialDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705140516056_MainServiceGroupsTable.cs" />
+    <Compile Include="Migrations\201705140516056_MainServiceGroupsTable.Designer.cs">
+      <DependentUpon>201705140516056_MainServiceGroupsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PostOfficeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,6 +109,7 @@
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\DistrictRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
+    <Compile Include="Repositories\MainServiceGroupRepository.cs" />
     <Compile Include="Repositories\PORepository.cs" />
     <Compile Include="Repositories\ServiceGroupRepository.cs" />
     <Compile Include="Repositories\ServiceRepository.cs" />
@@ -123,6 +128,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705101422110_InitialDB.resx">
       <DependentUpon>201705101422110_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705140516056_MainServiceGroupsTable.resx">
+      <DependentUpon>201705140516056_MainServiceGroupsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

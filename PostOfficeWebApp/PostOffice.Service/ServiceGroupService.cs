@@ -66,7 +66,7 @@ namespace PostOffice.Service
 
         public IEnumerable<ServiceGroup> GetAllByParentId(int parentId)
         {
-            return _serviceGroupRepository.GetMulti(x => x.ParentID == parentId && x.Status);
+            return _serviceGroupRepository.GetMulti(x => x.MainServiceGroupId == parentId && x.Status);
         }
 
         public IEnumerable<Model.Models.Service> GetAllByServiceGroupId(int id)

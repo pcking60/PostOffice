@@ -78,11 +78,26 @@ namespace PostOffice.Web.Infrastructure.Extensions
             serviceGroup.MetaDescription = serviceGroupVM.MetaDescription;
             serviceGroup.MetaKeyWord = serviceGroupVM.MetaKeyWord;
             serviceGroup.Name = serviceGroupVM.Name;
-            serviceGroup.ParentID = serviceGroupVM.ParentID;
+            serviceGroup.MainServiceGroupId = serviceGroupVM.MainServiceGroupId;
 
             serviceGroup.Status = serviceGroupVM.Status;
             serviceGroup.UpdatedBy = serviceGroupVM.UpdatedBy;
             serviceGroup.UpdatedDate = serviceGroupVM.UpdatedDate;
+        }
+
+        public static void UpdateMainServiceGroup(this MainServiceGroup mainServiceGroup, MainServiceGroupViewModel mainServiceGroupVM)
+        {
+            mainServiceGroup.Id = mainServiceGroupVM.Id;
+
+            mainServiceGroup.CreatedBy = mainServiceGroupVM.CreatedBy;
+            mainServiceGroup.CreatedDate = mainServiceGroupVM.CreatedDate;
+            mainServiceGroup.MetaDescription = mainServiceGroupVM.MetaDescription;
+            mainServiceGroup.MetaKeyWord = mainServiceGroupVM.MetaKeyWord;
+            mainServiceGroup.Name = mainServiceGroupVM.Name;
+
+            mainServiceGroup.Status = mainServiceGroupVM.Status;
+            mainServiceGroup.UpdatedBy = mainServiceGroupVM.UpdatedBy;
+            mainServiceGroup.UpdatedDate = mainServiceGroupVM.UpdatedDate;
         }
 
         public static void UpdateService(this PostOffice.Model.Models.Service service, ServiceViewModel serviceVM)
